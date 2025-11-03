@@ -69,8 +69,8 @@ La documentación de los endpoints está disponible en el siguiente PDF.
 
 **[Tu Nombre Completo]**
 
-* **GitHub:** [gabito1k6](https://github.com/tu-usuario)
-* **LinkedIn:** [linkedin.com/in/tu-linkedin](https://linkedin.com/in/tu-linkedin)
+* **GitHub:** [@gabito1k6](https://github.com/gabito1k6)
+* **LinkedIn:** [linkedin.com/in/matias](www.linkedin.com/in/matias-degasperi-garay-05761b314)
 
 ---
 <p align="center">
