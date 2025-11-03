@@ -1,0 +1,20 @@
+version: "3.8"
+
+services:
+  keycloak:
+    # Usamos la imagen oficial de Keycloak
+    image: quay.io/keycloak/keycloak:latest
+    container_name: keycloak
+
+    # Comando para arrancar en modo desarrollo (más fácil)
+    command: start-dev
+
+    # Variables de entorno para crear el super-admin
+    environment:
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
+
+    # Mapeamos el puerto 8080 de Keycloak al 8180 de tu máquina
+    # (para que no choque con tu API Gateway que corre en 8080)
+    ports:
+      - "8180:8080"

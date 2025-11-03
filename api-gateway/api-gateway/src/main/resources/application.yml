@@ -1,0 +1,17 @@
+# Puerto en el que correrá el API Gateway
+server:
+  port: 8080
+
+# Nombre de la aplicación
+spring:
+  application:
+    name: api-gateway
+
+  # --- ESTO ES LO NUEVO ---
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          # Esta URL le dice al Gateway cómo validar los tokens.
+          # Apunta a tu realm de Keycloak (el que creamos).
+          issuer-uri: http://localhost:8180/realms/tpi-logistica
