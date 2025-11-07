@@ -1,6 +1,7 @@
 version: "3.8"
 
 services:
+  # --- Keycloak ---
   keycloak:
     image: quay.io/keycloak/keycloak:latest
     container_name: keycloak
@@ -8,19 +9,53 @@ services:
     environment:
       - KEYCLOAK_ADMIN=admin
       - KEYCLOAK_ADMIN_PASSWORD=admin
+      - KC_HTTP_PORT=8180
     ports:
-      - "8180:8080"
+      - "8180:8180"
+    depends_on:
+      - sql-server-db
 
+  # --- Base de Datos SQL Server ---
   sql-server-db:
     image: mcr.microsoft.com/mssql/server:2022-latest
-    container_name: sql-server
+    container_name: sql-server-db
     environment:
-      ACCEPT_EULA: 'Y'
-      SA_PASSWORD: '@gUt1n25!' 
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "@gut1n25!"
     ports:
       - "1433:1433"
     volumes:
       - sqlserver-data:/var/opt/mssql
 
+  # --- API Gateway ---
+  api-gateway:
+    # Apunta a la carpeta correcta (según tu captura)
+    build: ../api-gateway/api-gateway
+    container_name: api-gateway
+    ports:
+      - "8080:8080" # El puerto público
+    extra_hosts:
+      - "host.docker.internal:172.17.0.1"
+    depends_on:
+      - keycloak
+
+  # --- Servicio de Gestión ---
+  servicio-gestion:
+    # Apunta a la carpeta de servicio-gestion
+    build: ../servicio-gestion
+    container_name: servicio-gestion
+    ports:
+      - "8081:8081" # Puerto interno
+
+    # Estrategia de reinicio:
+    # Si falla (ej: "Connection refused"),
+    # Docker esperará y lo volverá a intentar.
+    restart: on-failure
+
+    depends_on:
+      - keycloak
+      - sql-server-db # Asegura el orden de arranque
+
+# --- Volúmenes ---
 volumes:
   sqlserver-data:

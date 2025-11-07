@@ -15,8 +15,8 @@ public class GatewayConfig {
                 // 1. Ruta para servicio-gestion
                 .route("servicio-gestion-route", r -> r.path("/gestion/**") // Si la URL empieza con /gestion/
                         .filters(f -> f.stripPrefix(1)) // Le quita el /gestion
-                        //.uri("http://servicio-gestion:8081")) // Lo manda a este contenedor
-                        .uri("http://localhost:8081"))//Para pruebas con eco
+                        .uri("http://servicio-gestion:8081")) // Lo manda a este contenedor
+                        //.uri("http://localhost:8081"))//Para pruebas con eco
 
                 // 2. Ruta para servicio-logistica
                 .route("servicio-logistica-route", r -> r.path("/logistica/**") // Si empieza con /logistica/

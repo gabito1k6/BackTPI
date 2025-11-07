@@ -65,12 +65,11 @@ La documentación de los endpoints está disponible en el siguiente PDF.
 
 [https://drive.google.com/file/d/1mA5COlAXPtuQH7nA1ZPAxq9ZBdIskvhL/view?usp=sharing]
 
-## 👤 Autor
+## 👤 Autores
 
-**Matias Degasperi**
+* **Agustin Dendarys**
+* **Matias Degasperi**
 
-* **GitHub:** [@gabito1k6](https://github.com/gabito1k6)
-* **LinkedIn:** [www.linkedin.com/in/matias-degasperi-garay-05761b314](www.linkedin.com/in/matias-degasperi-garay-05761b314)
 
 ---
 <p align="center">
