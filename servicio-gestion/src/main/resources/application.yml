@@ -1,6 +1,5 @@
-# Puerto para este microservicio
 server:
-  port: 8081
+  port: 8081 # Puerto para este microservicio
 
 spring:
   # Configuración de Keycloak
@@ -8,13 +7,21 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:8180/realms/tpi-logistica
-  
+          # ¡Clave! Apunta a la URL que Postman usa para pedir el token
+          issuer-uri: http://keycloak:8180/realms/tpi-logistica
+
+  # Configuración de la Base de Datos
   datasource:
-    url: jdbc:sqlserver://localhost:1433;databaseName=tpi-db;encrypt=false;trustServerCertificate=true
+    # Apunta al nombre del contenedor de la BD
+    url: jdbc:sqlserver://sql-server-db:1433;databaseName=tpi-db;encrypt=false;trustServerCertificate=true;createDatabaseIfNotExist=true
     username: sa
-    password: '@gUt1n25!'
-  
+    password: "@gut1n25!" # La clave del docker-compose
+
+  # Configuración de JPA
   jpa:
+    show-sql: true # Muestra el SQL en la consola
     hibernate:
-      ddl-auto: update
+      ddl-auto: update # Actualiza las tablas de la BD al arrancar
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.SQLServerDialect
