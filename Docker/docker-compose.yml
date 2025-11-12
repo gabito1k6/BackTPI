@@ -56,6 +56,17 @@ services:
       - keycloak
       - sql-server-db # Asegura el orden de arranque
 
+  # --- SERVICIO DE LOGÍSTICA (NUEVO) ---
+  servicio-logistica:
+    build: ../servicio-logistica # (Asegurate que la ruta a tu proyecto sea correcta)
+    container_name: servicio-logistica
+    ports:
+      - "8082:8082" # Puerto interno
+    restart: on-failure
+    depends_on:
+      - keycloak
+      - sql-server-db
+
 # --- Volúmenes ---
 volumes:
   sqlserver-data:

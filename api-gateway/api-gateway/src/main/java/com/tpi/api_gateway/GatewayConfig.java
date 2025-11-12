@@ -21,8 +21,8 @@ public class GatewayConfig {
                 // 2. Ruta para servicio-logistica
                 .route("servicio-logistica-route", r -> r.path("/logistica/**") // Si empieza con /logistica/
                         .filters(f -> f.stripPrefix(1)) // Le quita el /logistica
-                        //.uri("http://servicio-logistica:8082")) // Lo manda a este contenedor
-                        .uri("http://postman-echo.com"))//Para pruebas con eco
+                        .uri("http://servicio-logistica:8082")) // Lo manda a este contenedor
+                        //.uri("http://postman-echo.com"))//Para pruebas con eco
                 
                 // 3. Ruta para las integraciones (manejada por logística)
                 .route("servicio-integraciones-route", r -> r.path("/integraciones/**")

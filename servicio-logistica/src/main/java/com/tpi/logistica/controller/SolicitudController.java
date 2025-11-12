@@ -11,7 +11,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/logistica/solicitudes")
+@RequestMapping("/solicitudes")
 @RequiredArgsConstructor
 public class SolicitudController {
 
@@ -51,7 +51,7 @@ public class SolicitudController {
 
     // PUT /logistica/solicitudes/{id}/estado
     @PutMapping("/{id}/estado")
-    // @PreAuthorize("hasRole('ADMIN')")
+    // @PreAuthorize("hasRole('ADMIN',"CLIENTE")")
     public Solicitud cambiarEstado(@PathVariable Long id,
                                    @RequestBody CambiarEstadoSolicitudDTO dto) {
         return solicitudService.cambiarEstado(id, dto);

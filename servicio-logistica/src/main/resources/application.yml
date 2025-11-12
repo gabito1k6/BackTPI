@@ -1,22 +1,38 @@
 server:
+  # Puerto para este microservicio. 8082 es el que definimos en el Gateway
   port: 8082
 
 spring:
-  datasource:
-    url: jdbc:h2:mem:logistica;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
-    driver-class-name: org.h2.Driver
-    username: sa
-    password: sa
+  application:
+    name: servicio-logistica
 
+  # --- Configuración de Keycloak ---
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          # ¡Clave! Apunta al nombre del host (keycloak) que definimos en el archivo hosts
+          issuer-uri: http://keycloak:8180/realms/tpi-logistica
+
+  # --- Configuración de la Base de Datos (SQL Server) ---
+  datasource:
+    # Apunta al nombre del contenedor de la BD
+    url: jdbc:sqlserver://sql-server-db:1433;databaseName=tpi-db;encrypt=false;trustServerCertificate=true;createDatabaseIfNotExist=true
+    username: sa
+    password: "@gut1n25!"
+
+  # --- Configuración de JPA ---
   jpa:
-    hibernate:
-      ddl-auto: update
     show-sql: true
+    hibernate:
+      # Usamos "update". Como la BD es compartida,
+      # servicio-gestion ya creó las tablas. Este solo agregará las suyas.
+      ddl-auto: update
     properties:
       hibernate:
-        format_sql: true
+        dialect: org.hibernate.dialect.SQLServerDialect
 
-  h2:
-    console:
-      enabled: true
-      path: /h2-console
+# --- Configuración de Swagger/OpenAPI ---
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html

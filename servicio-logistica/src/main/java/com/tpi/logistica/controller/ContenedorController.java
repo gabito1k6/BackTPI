@@ -12,7 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/logistica/contenedores")
+@RequestMapping("/contenedores")
 @RequiredArgsConstructor
 public class ContenedorController {
 

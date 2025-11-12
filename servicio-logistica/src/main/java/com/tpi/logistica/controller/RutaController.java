@@ -17,7 +17,7 @@ import java.util.Collections;
 import java.util.List;
 
 @RestController
-@RequestMapping("/logistica")
+@RequestMapping("/rutas")
 @RequiredArgsConstructor
 public class RutaController {
 
@@ -56,7 +56,7 @@ public class RutaController {
      * Devuelve rutas tentativas con costo/tiempo estimado.
      * (usa la lógica que tengas en RutaTramoService.calcularRutasTentativas)
      */
-    @PostMapping("/rutas/tentativas")
+    @PostMapping("/tentativas")
     // @PreAuthorize("hasRole('ADMIN')")
     public List<RutaTentativaDTO> obtenerRutasTentativas(
             @RequestBody RutaTentativaRequestDTO request) {
@@ -80,7 +80,7 @@ public class RutaController {
      * GET /logistica/rutas/{rutaId}/tramos (ADMIN)
      * Devuelve los tramos ordenados de una ruta.
      */
-    @GetMapping("/rutas/{rutaId}/tramos")
+    @GetMapping("/{rutaId}/tramos")
     // @PreAuthorize("hasRole('ADMIN')")
     public List<Tramo> obtenerTramosPorRuta(@PathVariable Long rutaId) {
         return rutaTramoService.obtenerTramosPorRuta(rutaId);

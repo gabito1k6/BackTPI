@@ -10,7 +10,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/logistica")
+@RequestMapping("/tramos")
 @RequiredArgsConstructor
 public class TramoController {
 
