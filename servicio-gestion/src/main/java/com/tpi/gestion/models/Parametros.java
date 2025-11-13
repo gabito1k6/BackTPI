@@ -12,14 +12,20 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Builder
 @AllArgsConstructor
-@Data
 @NoArgsConstructor
-@Table(name = "ESTADO_TRAMO")
-public class EstadoTramo {
+@Builder
+@Data
+@Table(name = "PARAMETROS")
+public class Parametros {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ESTADO_TRAMO_ID")
-    private long estadoTramoId;
+    @Column(name = "PARAMETRO_ID")
+    private long parametroId;
+
+    @Column(name = "VALOR_LITRO_COMBUSTIBLE")
+    private long valorLitroCombustible;
+    
+    @Column(name = "CARGOS_FIJOS")
+    private long cargosFijos;
 }
