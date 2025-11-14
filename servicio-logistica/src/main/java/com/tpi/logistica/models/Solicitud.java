@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.Duration;
+import java.time.LocalDateTime;
 
 @Entity
 @AllArgsConstructor
@@ -59,4 +60,14 @@ public class Solicitud {
 
     @Column(name = "TIEMPO_REAL")
     private Duration tiempoReal;
+
+    @Column(name = "FECHA_CREACION")
+    private LocalDateTime fechaCreacion;
+
+    @PrePersist
+    public void onCreate() {
+        if (fechaCreacion == null) {
+            fechaCreacion = LocalDateTime.now();
+        }
+    }
 }

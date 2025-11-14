@@ -1,27 +1,49 @@
+# server:
+#   port: 8081 # Puerto para este microservicio
+
+# spring:
+#   # Configuración de Keycloak
+#   security:
+#     oauth2:
+#       resourceserver:
+#         jwt:
+#           # ¡Clave! Apunta a la URL que Postman usa para pedir el token
+#           issuer-uri: http://keycloak:8180/realms/tpi-logistica
+
+#   # Configuración de la Base de Datos
+#   datasource:
+#     # Apunta al nombre del contenedor de la BD
+#     url: jdbc:sqlserver://sql-server-db:1433;databaseName=tpi-db;encrypt=false;trustServerCertificate=true;createDatabaseIfNotExist=true
+#     username: sa
+#     password: "@gut1n25!" # La clave del docker-compose
+
+#   # Configuración de JPA
+#   jpa:
+#     show-sql: true # Muestra el SQL en la consola
+#     hibernate:
+#       ddl-auto: update # Actualiza las tablas de la BD al arrancar
+#     properties:
+#       hibernate:
+#         dialect: org.hibernate.dialect.SQLServerDialect
 server:
   port: 8081 # Puerto para este microservicio
 
 spring:
-  # Configuración de Keycloak
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          # ¡Clave! Apunta a la URL que Postman usa para pedir el token
-          issuer-uri: http://keycloak:8180/realms/tpi-logistica
-
-  # Configuración de la Base de Datos
   datasource:
-    # Apunta al nombre del contenedor de la BD
-    url: jdbc:sqlserver://sql-server-db:1433;databaseName=tpi-db;encrypt=false;trustServerCertificate=true;createDatabaseIfNotExist=true
+    url: jdbc:h2:mem:gestion;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driver-class-name: org.h2.Driver
     username: sa
-    password: "@gut1n25!" # La clave del docker-compose
+    password: sa
 
-  # Configuración de JPA
   jpa:
-    show-sql: true # Muestra el SQL en la consola
     hibernate:
-      ddl-auto: update # Actualiza las tablas de la BD al arrancar
+      ddl-auto: update
+    show-sql: true
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.SQLServerDialect
+        format_sql: true
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-console

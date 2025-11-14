@@ -8,5 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ContenedorRepository extends JpaRepository<Contenedor, Long> {
     Page<Contenedor> findByEstadoActual(EstadoContenedor estado, Pageable pageable);
+    Page<Contenedor> findByEstadoActualNot(EstadoContenedor estado, Pageable pageable);
+
 }
 

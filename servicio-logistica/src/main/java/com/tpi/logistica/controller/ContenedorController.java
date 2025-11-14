@@ -1,8 +1,10 @@
 package com.tpi.logistica.controller;
 
+import com.tpi.logistica.DTO.ContenedorPendienteDTO;
 import com.tpi.logistica.models.Contenedor;
 import com.tpi.logistica.models.EstadoContenedor;
 import com.tpi.logistica.repo.ContenedorRepository;
+import com.tpi.logistica.service.ContenedorPendienteProxyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,14 +19,13 @@ import org.springframework.web.bind.annotation.*;
 public class ContenedorController {
 
     private final ContenedorRepository contenedorRepository;
+    private final ContenedorPendienteProxyService contenedorPendienteProxyService;
 
     /**
      * GET /logistica/contenedores?estado=&page=&size=
-     * Lista contenedores, con filtro opcional por estado.
-     * (Enunciado menciona depositoId, pero tu entidad no lo tiene, así que no se filtra por eso.)
+     * Lista contenedores propios de LOGÍSTICA, con filtro opcional por estado.
      */
     @GetMapping
-    // @PreAuthorize("hasRole('ADMIN')")
     public Page<Contenedor> listar(
             @RequestParam(required = false) EstadoContenedor estado,
             @PageableDefault(size = 20) Pageable pageable) {
@@ -37,10 +38,8 @@ public class ContenedorController {
 
     /**
      * GET /logistica/contenedores/{id}
-     * ADMIN o CLIENTE dueño (sin seguridad por ahora).
      */
     @GetMapping("/{id}")
-    // @PreAuthorize("hasAnyRole('ADMIN','CLIENTE')")
     public ResponseEntity<Contenedor> obtener(@PathVariable Long id) {
         return contenedorRepository.findById(id)
                 .map(ResponseEntity::ok)
@@ -48,14 +47,20 @@ public class ContenedorController {
     }
 
     /**
-     * (Opcional) POST /logistica/contenedores
-     * Solo si querés crear contenedores desde este servicio.
-     * Muy útil para pruebas locales.
+     * POST /logistica/contenedores
+     * (solo para pruebas locales, si querés crear contenedores en LOGÍSTICA)
      */
     @PostMapping
-    // @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Contenedor> crear(@RequestBody Contenedor contenedor) {
         Contenedor creado = contenedorRepository.save(contenedor);
         return ResponseEntity.status(HttpStatus.CREATED).body(creado);
     }
+
+    /**
+     * GET /logistica/contenedores/pendientes?depositoId=&page=&size=
+     * Usa el servicio de GESTIÓN vía WebClient (ContenedorPendienteProxyService)
+     * y devuelve los ContenedorPendienteDTO.
+     */
+   
 }
+
