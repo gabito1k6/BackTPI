@@ -67,6 +67,17 @@ services:
       - keycloak
       - sql-server-db
 
+  # --- OSRM (Servidor de Rutas) ---
+  osrm:
+    image: osrm/osrm-backend:latest
+    container_name: osrm
+    ports:
+      - "5000:5000"
+    volumes:
+      - ../osrm-data:/data
+    command: osrm-routed /data/argentina-latest.osrm
+    restart: always
+
 # --- Volúmenes ---
 volumes:
   sqlserver-data:

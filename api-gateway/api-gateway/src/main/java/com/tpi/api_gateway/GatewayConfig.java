@@ -26,9 +26,9 @@ public class GatewayConfig {
                 
                 // 3. Ruta para las integraciones (manejada por logística)
                 .route("servicio-integraciones-route", r -> r.path("/integraciones/**")
-                        .filters(f -> f.stripPrefix(1))
-                        //.uri("http://servicio-logistica:8082"))
-                        .uri("http://postman-echo.com"))//Para pruebas con eco
+                        //.filters(f -> f.stripPrefix(1))
+                        .uri("http://servicio-logistica:8082"))
+                        //.uri("http://postman-echo.com"))//Para pruebas con eco
 
                 .build();
     }
