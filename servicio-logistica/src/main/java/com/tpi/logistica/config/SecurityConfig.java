@@ -41,7 +41,7 @@ public class SecurityConfig {
 
                 // 4. Rutas de ADMIN (prácticamente todo lo demás) 
                 // (hasRole("ADMIN") también permite acceder a las rutas de Cliente y Transportista si el traductor funciona bien)
-                .requestMatchers("/solicitudes/**", "/rutas/**", "/tramos/**", "/clientes/**", "/contenedores/**").hasRole("ADMIN")
+                .requestMatchers("/solicitudes/**", "/rutas/**", "/tramos/**", "/clientes/**", "/contenedores/**","/reportes/**").hasRole("ADMIN")
                 
                 // 5. Ruta de Integraciones (Google Maps) - Asumimos que solo el ADMIN la usa para calcular rutas
                 .requestMatchers("/integraciones/**").hasRole("ADMIN")
